@@ -155,20 +155,10 @@ message += "Time: " + data.time + "\n";
 alert(message);
 });
      </script>
-<script>
-   
- 
-  
-
-
-</script>
 
 
 
-<script>
 
-
-</script>
 
 {{-- <script src="{{asset('js/pusherNotifications.js')}}"></script> --}}
 
