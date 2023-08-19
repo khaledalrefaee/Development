@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Events\NewNotification;
+use App\Mail\testemail;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Data;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendMails;
 
 class HomeController extends Controller
 {
@@ -53,5 +57,14 @@ class HomeController extends Controller
 
         event(new NewNotification($data));
         return redirect()->back()->with(['success'=>'تمت اضافة تعليق بنجاح']);
+    }
+
+    public function send_email(){
+
+        $emails =  Data::chunk(5 ,function ($data){
+            dispatch(new SendMails($data));
+    });
+      
+        return 'تم';
     }
 }

@@ -31,7 +31,7 @@ class testemail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Testemail',
+            subject: 'mail from Khaled alrefaee New',
         );
     }
 
@@ -43,7 +43,7 @@ class testemail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'mail.test',
         );
     }
 

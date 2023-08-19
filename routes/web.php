@@ -42,5 +42,7 @@ Route::group([ 'middleware' => 'auth'], function () {
 Route::get('get-checkout-id', [PaymentProviderController::class,'getCheckOutId'])->name('offers.checkout');
 
 ################End paymentGateways Routes ########################
+Route::get('/send/email', [HomeController::class,'send_email'])->middleware(['auth', 'verified'])->name('send_email');
+
 
 require __DIR__.'/auth.php';
