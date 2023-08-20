@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PaymentProviderController;
-
-
+use App\Http\Controllers\WinnerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +41,15 @@ Route::group([ 'middleware' => 'auth'], function () {
 Route::get('get-checkout-id', [PaymentProviderController::class,'getCheckOutId'])->name('offers.checkout');
 
 ################End paymentGateways Routes ########################
+
+################job && Queues ########################
+
 Route::get('/send/email', [HomeController::class,'send_email'])->middleware(['auth', 'verified'])->name('send_email');
 
+################End job && Queues ########################
+
+Route::get('/view', [WinnerController::class,'index'])->middleware(['auth', 'verified'])->name('view.users');
+
+Route::post('/save/users', [WinnerController::class,'save'])->middleware(['auth', 'verified'])->name('save.users');
 
 require __DIR__.'/auth.php';

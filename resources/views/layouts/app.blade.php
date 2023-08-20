@@ -34,6 +34,9 @@
             
             <a href="{{route('send_email')}}">send email with job</a>
 
+            <a href="{{route('view.users')}}">view Winner with job</a>
+
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
