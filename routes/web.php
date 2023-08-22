@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PaymentProviderController;
+use App\Http\Controllers\SochialController;
+use App\Http\Controllers\TowfactoreController;
 use App\Http\Controllers\WinnerController;
 
 /*
@@ -22,7 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [HomeController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [HomeController::class,'index'])->middleware(['auth', 'verified','tow_factor',])->name('dashboard');
 Route::post('comment', [HomeController::class,'saveComment'])->name('comment.save');
 
 Route::middleware('auth')->group(function () {
@@ -30,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 ################Begin paymentGateways Routes ########################
 
@@ -52,4 +55,9 @@ Route::get('/view', [WinnerController::class,'index'])->middleware(['auth', 'ver
 
 Route::post('/save/users', [WinnerController::class,'save'])->middleware(['auth', 'verified'])->name('save.users');
 
+Route::get('/auth/googel', [SochialController::class,'google']);
+Route::get('/auth/googel/callback', [SochialController::class,'handelGoogel']);
+
+
+Route::resource('verify',TowfactoreController::class);
 require __DIR__.'/auth.php';

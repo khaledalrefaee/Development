@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\User;
+use App\Notifications\TowFactornotifi;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +51,12 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+        //inset code
+        $user=User::where('email',$this->input('email'))->first();
+        $user->generateCode();
+        
+        //send email
+        $user->notify(new TowFactornotifi());
         RateLimiter::clear($this->throttleKey());
     }
 
